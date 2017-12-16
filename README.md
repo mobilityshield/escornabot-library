@@ -1,6 +1,9 @@
 # Autoría
 *Prudencio Luna* y *Pedro Ruiz*
 
+# Aportaciones
+*Juan Antonio Vacas*
+
 # Control de Versiones
 - 0.11 (19/11/2017): se añade procedimiento blueT(), para conocer el datos recibido por bluetooth.
 - 0.1 (8/11/2017): primera versión del programa, incorpora control de motores paso a paso (avances, retrocesos, giros, parada), elección del tipo de excitación de bobinas, control de leds, zumbador y botonera.
