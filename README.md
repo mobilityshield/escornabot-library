@@ -2,7 +2,7 @@
 *Prudencio Luna* y *Pedro Ruiz*
 
 # Aportaciones
-*Juan Antonio Vacas*
+*Jose Antonio Vacas*
 
 # Control de Versiones
 - 0.11 (19/11/2017): se añade procedimiento blueT(), para conocer el datos recibido por bluetooth.
