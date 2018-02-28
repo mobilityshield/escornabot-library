@@ -16,47 +16,47 @@ void loop() {
 
   switch (mirobot.pushButton()) {
 
-    case Boton.Delantero: //si pulsamos el botón delantero, se enciende led delantero, se mueve 1/4 de vuelta hacia delante, y se apaga el led delantero
-      mirobot.ledON (Led.Delantero);
+    case forward://si pulsamos el botón delantero, se enciende led delantero, se mueve 1/4 de vuelta hacia delante, y se apaga el led delantero
+      mirobot.ledON (forward);
       mirobot.drive (0.25, 10);
-      mirobot.ledOFF (Led.Delantero);
+      mirobot.ledOFF (forward);
       break;
 
-    case Boton.Trasero://si pulsamos el botón trasero, se enciende led trasero, se mueve 1/4 de vuelta hacia atrás, y se apaga el led trasero
-      mirobot.ledON (Led.Trasero);
+    case backward://si pulsamos el botón trasero, se enciende led trasero, se mueve 1/4 de vuelta hacia atrás, y se apaga el led trasero
+      mirobot.ledON (backward);
       mirobot.drive (-0.25, 10);
-      mirobot.ledOFF (Led.Trasero);
+      mirobot.ledOFF (backward);
       break;
 
-    case Boton.Derecho://si pulsamos el botón derecho, se enciende led derecho, se mueve 1/8 de vuelta hacia la derecha, y se apaga el led derecho
-      mirobot.ledON (Led.Derecho);
+    case right://si pulsamos el botón derecho, se enciende led derecho, se mueve 1/8 de vuelta hacia la derecha, y se apaga el led derecho
+      mirobot.ledON (right);
       mirobot.turn (0.125, 10);
-      mirobot.ledOFF (Led.Derecho);
+      mirobot.ledOFF (right);
       break;
 
-    case Boton.Izquierdo://si pulsamos el botón izquierdo, se enciende led izquierdo, se mueve 1/8 de vuelta hacia la izquierda, y se apaga el led izquierdo
-      mirobot.ledON (Led.Izquierdo);
+    case left://si pulsamos el botón izquierdo, se enciende led izquierdo, se mueve 1/8 de vuelta hacia la izquierda, y se apaga el led izquierdo
+      mirobot.ledON (left);
       mirobot.turn (-0.125, 10);
-      mirobot.ledOFF (Led.Izquierdo);
+      mirobot.ledOFF (left);
       break;
 
-    case Boton.Central://si pulsamos el botón central, suena le zumbador y se enciende todos los leds durante un segundo, después se apagan el zumbador y los leds
+    case central://si pulsamos el botón central, suena el zumbador y se enciende todos los leds durante un segundo, después se apagan el zumbador y los leds
       mirobot.buzzON ();
-      for (int i = 1; i < NumeroLeds; i++)
+      for (int i = 1; i < mirobot.numberLeds; i++)
       {
         mirobot.ledON(i);
       }
       delay (1000);
       mirobot.buzzOFF();
 
-      for (int i = 1; i < NumeroLeds; i++)
+      for (int i = 1; i < mirobot.numberLeds; i++)
       {
         mirobot.ledOFF(i);
       }
 
   }
 
-  switch (mirobot.blueT()) {
+  switch (mirobot.blueT()) {//en función del caracter emitido por bluetooth hace varias acciones
     case 'A':
       mirobot.drive (0.25, 12);
       break;
@@ -72,38 +72,38 @@ void loop() {
     case '1':
       /*led1 = !led1;
       if (led1) {
-        mirobot.ledON(Led.Delantero);
+        mirobot.ledON(left);
       }
       else {
-        mirobot.ledOFF(Led.Delantero);
+        mirobot.ledOFF(left);
       }*/
-      mirobot.invierteLed(Izquierdo);
+      invierteLed(forward);
       break;
     case '2':
       led2 = !led2;
       if (led2) {
-        mirobot.ledON(Derecho);
+        mirobot.ledON(left);
       }
       else {
-        mirobot.ledOFF(Derecho);
+        mirobot.ledOFF(left);
       }
       break;
     case '3':
       led3 = !led3;
       if (led3) {
-        mirobot.ledON(Delantero);
+        mirobot.ledON(backward);
       }
       else {
-        mirobot.ledOFF(Delantero);
+        mirobot.ledOFF(backward);
       }
       break;
     case '4':
       led4 = !led4;
       if (led4) {
-        mirobot.ledON(Trasero);
+        mirobot.ledON(right);
       }
       else {
-        mirobot.ledOFF(Trasero);
+        mirobot.ledOFF(right);
       }
       break;
     case '5':

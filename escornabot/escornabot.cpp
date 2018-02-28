@@ -1,7 +1,7 @@
 /*
 Librería escornabot por Prudencio Luna y Pedro Ruiz
-V 0.1 (8/11/2017): primera versión del programa, incorpora control de motores paso a paso (avances, retrocesos, giros, parada)
-, elección del tipo de excitación de bobinas, control de leds, zumbador y botonera.
+V 0.12 (28/02/2018): segunda versión del programa, incorpora control de motores paso a paso (avances, retrocesos, giros, parada)
+, elección del tipo de excitación de bobinas, control de leds, zumbador, botonera y bluetooth.
 */
 
 #include "Arduino.h"
@@ -28,12 +28,11 @@ const int led[4] = {14,15,16,17}; // 1 Azul, blue;2 Rojo, red;3 Amarillo, yellow
 const int pushButtons = A7; //Es una variable analógica. En un circuito paralelo que en función de la tecla que pulsemos obtenemos un valor analógico distinto
 
 /*Valores aproximados que se obtienen al accionar los pulsadores*/
-int up = 768;
-int down = 512;
-int left = 882;
-int right = 683;
-int center = 819;
-
+int buttonBackward = 768;
+int buttonForward = 512;
+int buttonRight = 882;
+int buttonLeft = 683;
+int buttonCenter = 819;
 
 
 /*
@@ -103,7 +102,7 @@ escornabot::escornabot(int kindStep) //aquí se construye el objeto escornabot c
 
 
 /*
-dirve procedimiento para avanzar y retroceder
+drive procedimiento para avanzar y retroceder
 */
 
 void escornabot::drive (float laps, int speed) {//vueltas son el nº de vueltas a dar (+ avanza o - retrocede) y velocidad en rpm
@@ -239,16 +238,16 @@ void escornabot::buzzOFF(void){
  * pushButton procedimiento para determinar el pulsador pulsado
  * */
 int escornabot::pushButton(void){
-  if(analogRead(pushButtons)>= 748 && analogRead(pushButtons)<=788) {//adelante
+  if(analogRead(pushButtons)>= 748 && analogRead(pushButtons)<=788) {//atras
     return 3;
   }
-  if(analogRead(pushButtons)>= 492 && analogRead(pushButtons)<=532) {//atrás
+  if(analogRead(pushButtons)>= 492 && analogRead(pushButtons)<=532) {//adelante
     return 1;
   }
-  if(analogRead(pushButtons)>= 862 && analogRead(pushButtons)<=902) {//izquierda
+  if(analogRead(pushButtons)>= 862 && analogRead(pushButtons)<=902) {//derecha
     return 4;
   }
-  if(analogRead(pushButtons)>= 663 && analogRead(pushButtons)<=703) {//derecha
+  if(analogRead(pushButtons)>= 663 && analogRead(pushButtons)<=703) {//izquierda
     return 2;
   }
   if(analogRead(pushButtons)>= 799 && analogRead(pushButtons)<=839) {//centro
@@ -275,5 +274,6 @@ else return 0;
   version() procedimiento que devuelve la versión de la librería
 */
 int escornabot::version(void){
-  return 0.1;
+  return 0.12;
 }
+
