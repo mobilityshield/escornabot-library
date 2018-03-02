@@ -72,10 +72,10 @@ void loop() {
     case '1':
       /*led1 = !led1;
       if (led1) {
-        mirobot.ledON(left);
+        mirobot.ledON(forward);
       }
       else {
-        mirobot.ledOFF(left);
+        mirobot.ledOFF(forward);
       }*/
       invierteLed(forward);
       break;
