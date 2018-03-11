@@ -1,6 +1,6 @@
 /*
 Librería escornabot por Prudencio Luna y Pedro Ruiz
-V 0.12 (28/02/2018): segunda versión del programa, incorpora control de motores paso a paso (avances, retrocesos, giros, parada)
+V 0.13 (07/03/2018): tercera versión del programa, incorpora control de motores paso a paso (avances, retrocesos, giros, parada)
 , elección del tipo de excitación de bobinas, control de leds, zumbador, botonera y bluetooth.
 */
 
@@ -20,20 +20,23 @@ class escornabot {
 	const static int numberButtons=5;
 	const static int numberLeds=5;
 
-  // procedimiento para mover los motores:
-  void drive (float laps, int speed);
-	//procemiento para girar:
+	// procedimiento para mover los motores:
+    void drive (float laps, int speed);
+	//procedimiento para mover los motores por distancia
+	void driveD (float distance, int speed); 
+	//procemiento para girar con vueltas:
 	void turn (float laps, int speed);
+	//procedimiento para girar con ańgulo:    
+	void turnA (float angle, int speed);
     // procedimiento para parar:
-  void stop();
-	//procedimiento para encender y apagar leds
-  void ledON(int ledNumber);
-  void ledOFF(int ledNumber);
-  int ledState(int ledNumber);
-
+  	void stop();
+	//procedimiento para encender y apagar leds, y saber estado
+  	void ledON(int ledNumber);
+  	void ledOFF(int ledNumber);
+  	int ledState(int ledNumber);
 	//procedimiento para encender y apagar el zumbador
-  void buzzON(void);
-  void buzzOFF(void);
+	void buzzON(void);
+	void buzzOFF(void);
 	//procedimiento para saber el botón que se ha pulsado
 	int pushButton(void);
 	//procedimiento que devuelve valor enviado por bluetooth

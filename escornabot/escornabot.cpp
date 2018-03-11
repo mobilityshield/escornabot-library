@@ -1,6 +1,6 @@
 /*
 Librería escornabot por Prudencio Luna y Pedro Ruiz
-V 0.12 (28/02/2018): segunda versión del programa, incorpora control de motores paso a paso (avances, retrocesos, giros, parada)
+V 0.13 (07/03/2018): tercera versión del programa, incorpora control de motores paso a paso (avances, retrocesos, giros, parada)
 , elección del tipo de excitación de bobinas, control de leds, zumbador, botonera y bluetooth.
 */
 
@@ -9,7 +9,7 @@ V 0.12 (28/02/2018): segunda versión del programa, incorpora control de motores
 
 // Declaración y asignación de variables privadas
 
-int step [4][4] =//matriz que describe puesta en marcha de bobinas por defecto (4 posiciones)
+	int step [4][4] =//matriz que describe puesta en marcha de bobinas por defecto (4 posiciones)
 		{
 	  	{1, 0, 0, 0},
 	  	{0, 1, 0, 0},
@@ -22,24 +22,24 @@ int step [4][4] =//matriz que describe puesta en marcha de bobinas por defecto (
 	int coilPosition=0;// devuelve la posición de la bobina en cada paso (4 posiciones)
 
 /*Pinout*/
-const int pinMotor[8]={2,3,4,5,6,7,8,9};//pines de motores
-const int buzz = 10; //pin del zumbador
-const int led[4] = {14,15,16,17}; // 1 Azul, blue;2 Rojo, red;3 Amarillo, yellow;4 Verde, green
-const int pushButtons = A7; //Es una variable analógica. En un circuito paralelo que en función de la tecla que pulsemos obtenemos un valor analógico distinto
+	const int pinMotor[8]={2,3,4,5,6,7,8,9};//pines de motores
+	const int buzz = 10; //pin del zumbador	
+	const int led[4] = {14,15,16,17}; // 1 Azul, blue;2 Rojo, red;3 Amarillo, yellow;4 Verde, green
+	const int pushButtons = A7; //Es una variable analógica. En un circuito paralelo que en función de la tecla que pulsemos obtenemos un valor analógico distinto
 
 /*Valores aproximados que se obtienen al accionar los pulsadores*/
-int buttonBackward = 768;
-int buttonForward = 512;
-int buttonRight = 882;
-int buttonLeft = 683;
-int buttonCenter = 819;
+	int buttonBackward = 768;
+	int buttonForward = 512;
+	int buttonRight = 882;
+	int buttonLeft = 683;
+	int buttonCenter = 819;
 
 
 /*
  escornabot constructor sin pasar parámetros
  */
 
-escornabot::escornabot() //si no se pasan prámetros al constructor por defecto coge el paso 1 (1 sóla bobina a la vez)
+escornabot::escornabot() //si no se pasan parámetros al constructor por defecto coge el paso 1 (1 sóla bobina a la vez)
 {
 //se inicializa las comunicaciones serie a 9600 baudios (para bluetooth)
 	Serial.begin (9600);//iniciamos las comunicaciones
@@ -143,6 +143,15 @@ void escornabot::drive (float laps, int speed) {//vueltas son el nº de vueltas 
 
 }//drive
 
+/*
+driveD procedimiento para avanzar y retroceder
+*/
+
+void escornabot::driveD (float distance, int speed) {//distancia es el nº de cm a avanzar (+ avanza o - retrocede) y velocidad en rpm
+	escornabot::drive ((distance/24.19),speed);
+
+}//driveD
+
 
 /*
 stop procedimiento de paro de los motores
@@ -157,10 +166,10 @@ void escornabot::stop () {
 }//stop
 
 /*
-turn procedimiento para girar
+turn procedimiento para girar con vueltas
 */
 
-void escornabot::turn (float laps, int speed) {//vueltas son el nº de vueltas a girar (+ en un sentido o - en el otro) y velocidad en rpm
+void escornabot::turn (float laps, int speed) {//laps son el nº de vueltas a girar (+ en un sentido o - en el otro) y speed en rpm
 
 	stepsDone=0;
 	if (laps>=0) {//si las vueltas son positivas provoca giro a la derecha moviendo rueda izquierda adelante y derecha atrás
@@ -198,6 +207,15 @@ void escornabot::turn (float laps, int speed) {//vueltas son el nº de vueltas a
 	}
 
 }//turn
+
+/*
+turnA procedimiento para girar con angulo
+*/
+
+void escornabot::turnA (float angle, int speed) {//angle son el nº de grados a girar (+ en un sentido o - en el otro) y speed en rpm
+
+	escornabot::turn (angle/360,speed);
+}//turnA
 
 /*
  *ledON procedimiento para encender leds
@@ -239,18 +257,23 @@ void escornabot::buzzOFF(void){
  * */
 int escornabot::pushButton(void){
   if(analogRead(pushButtons)>= 748 && analogRead(pushButtons)<=788) {//atras
-    return 3;
+	delay (50);    
+	return 3;
   }
   if(analogRead(pushButtons)>= 492 && analogRead(pushButtons)<=532) {//adelante
-    return 1;
+	delay (50);        
+	return 1;
   }
   if(analogRead(pushButtons)>= 862 && analogRead(pushButtons)<=902) {//derecha
-    return 4;
+   delay (50);     
+   return 4;
   }
   if(analogRead(pushButtons)>= 663 && analogRead(pushButtons)<=703) {//izquierda
-    return 2;
+	delay (50);       
+	return 2;
   }
   if(analogRead(pushButtons)>= 799 && analogRead(pushButtons)<=839) {//centro
+	delay (50);    
     return 5;
   }
   else {
@@ -274,6 +297,6 @@ else return 0;
   version() procedimiento que devuelve la versión de la librería
 */
 int escornabot::version(void){
-  return 0.12;
+  return 0.13;
 }
 
